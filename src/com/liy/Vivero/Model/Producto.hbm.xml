@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.liy.Vivero.Model">
+  <class name="Producto" table="Producto">
+      
+    <id name="id"
+	    column="id"
+	    type="java.lang.Integer"
+	    unsaved-value="null" >
+	    <generator class="native">
+	    </generator>
+    </id>
+    
+    <property name="nombre" column="nombre" type="java.lang.String"/>
+    <property name="condicion" column="condicion" type="java.lang.String"/>
+    <property name="fecha_ingreso" column="fecha_ingreso" type="java.lang.String"/>
+    
+   <many-to-one name="Tipo" class="Tipo" fetch="select">
+    	<column name="id_tipo" not-null="true" />
+    </many-to-one>
+    
+    <bag name="Historial" table="Historial" inverse="true" lazy="true" fetch="select">
+        <key>
+        	<column name="id_producto" not-null="true" />
+        </key>
+        <one-to-many class="Historial" />
+    </bag>
+    
+
+  </class>
+</hibernate-mapping>

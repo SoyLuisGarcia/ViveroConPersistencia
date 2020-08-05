@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.liy.Vivero.Model">
+  <class name="Tipo" table="Tipo">
+      
+    <id name="id"
+	    column="id"
+	    type="java.lang.Integer"
+	    unsaved-value="null" >
+	    <generator class="native">
+	    </generator>
+    </id>
+    
+    <property name="nombre" column="nombre" type="java.lang.String"/>
+    
+    <bag name="Producto" table="Producto" inverse="true" lazy="true" fetch="select">
+        <key>
+        	<column name="id_tipo" not-null="true" />
+        </key>
+        <one-to-many class="Producto" />
+    </bag>
+    
+    
+
+  </class>
+</hibernate-mapping>
